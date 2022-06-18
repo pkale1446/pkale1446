@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Application</title>
+
+    <style>
+        body{
+            padding: 10px 50px;
+        }
+        .formdesign{
+            font-size: 20px;
+        }
+        .formdesign input{
+            width: 35%;
+            padding: 12px 20px;
+            border: 1px solid blue;
+            margin: 14px;
+            border-radius: 4px;
+            font-size: 12px;
+        } 
+        .but{
+            border-radius: 9px;
+            width: 100px;
+            height: 50px;
+            font-size: 25px;
+            margin: 22px 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1> Loan Application</h1>
+    <form action="/My Action.php" name="my form" onsubmit="return validateForm()" method="Post">
+  <form>
+<div class="formdesign" id="name">
+Full name* : <input type="text" Name="fname" required><span class="formerror"><b></b> </span>
+</div>
+
+<div class="formdesign" id="name">
+Email*    : <input type="email" Name="femail" required><span class="formerror"><b></b> </span>
+    
+<div class="formdesign" id="name">
+Pan *      :  <input type="Pan" Name="Pan" required><span class="formerror"><b></b> </span>
+
+<div class="formdesign" id="name">
+Please Enter the Amount*:<input id="number">
+<button onclick="ConvertNumToWord()"> 
+Convert to word!</button>
+        <div class="formdesign" id="name"> 
+            
+        Captcha :<span style="color:#F00;font-size:20px">*</span>
+        <input type="text" class="form-control" style="margin-bottom: 0px; width: 200px; height: 40px; font-size: 24px; font-weight: bolder; text-decoration: line-through; display: inline-block; background-color: rgb(178, 0, 255);" id="mainCaptcha" disabled="">
+        
+        <button class="btn btn-success" type="button" style="display: inline-block;" id="refresh" onclick="Captcha();">Reset</button>
+<div style="margin-top:10px; color: #D8000C; background-color: #FFBABA; border-radius: 7px;" id="log"></div>
+ 
+<input style="margin-top:10px;" type="text" class="form-control" placeholder="Enter captcha" name="captcha" id="txtInput" required="">
+<div class="formdesign" id="name"> 
+<button class="btn btn-primary btn-lg" type="submit" name="submit">Submit </button>
+<div id="thank_you" style="display: none;">
+    <p>Thanks for filling up the form!</p>
+    <button type="submit">Close</button>
+  </div>
+</form>
+    </div>
+  </form>
+</body>
+<script>
+    function seterror(id,error){
+element=document.getElementById(id)
+element.getElementsByClassName('formerror')[0].innerHTML=error;
+
+    }
+    function validateForm(){
+        var returnval=true;
+        var name=document.forms['my form']["fname"].value;
+       if(name.length<5){
+           seterror("name","*Length of name is to short")
+           var returnval=false;
+       }
+           if(name.length==0){
+           seterror("name","*Length of name is not zero")
+           var returnval=false;
+       }
+
+       var name=document.forms['my form']["fpan"].value;
+       if(Pan.length<10){
+        //Alphanumeric Must be in this order and format: ABCDE1234F
+           seterror("Pan","*Length of Pan is atleast 10 characters long")
+           var returnval=false;
+function ConvertNumToWord(){
+    document.getElementById("Word").innerHTML=document.getElementById("Number").value;
+}
+
+        var alpha = new Array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z');
+             var i;
+             for (i=0;i<4;i++){
+               var a = alpha[Math.floor(Math.random() * alpha.length)];
+               var b = alpha[Math.floor(Math.random() * alpha.length)];
+               var c = alpha[Math.floor(Math.random() * alpha.length)];
+               var d = alpha[Math.floor(Math.random() * alpha.length)];
+              }
+            var code = a + '' + b + '' + '' + c + '' + d;
+            document.getElementById("mainCaptcha").value = code
+          }
+          function CheckValidCaptcha(){
+              var string1 = removeSpaces(document.getElementById('mainCaptcha').value);
+              var string2 = removeSpaces(document.getElementById('txtInput').value);
+              if (string1 == string2){
+         document.getElementById('success').innerHTML = "Form is validated Successfully";
+         //alert("Form is validated Successfully");
+                return true;
+              }
+              else{       
+         document.getElementById('error').innerHTML = "Please enter a valid captcha."; 
+         //alert("Please enter a valid captcha.");
+                return false;
+         
+              }
+          }
+          function validateForm(){
+            document.getElementById('log').innerHTML = '';
+            var string1 = removeSpaces(document.getElementById('mainCaptcha').value);
+            var string2 = removeSpaces(document.getElementById('txtInput').value);
+            if (string1 != string2 || string2 == ""){
+                Captcha();
+                document.getElementById('log').innerHTML += '<span style="font-size:16px; padding: 25px;">Entered Invalid Captcha</span> ';
+                return false;
+            }
+        }
+        function Captcha(){
+            var alpha = new Array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0');
+            var i;
+            for (i=0;i<6;i++){
+                var a = alpha[Math.floor(Math.random() * alpha.length)];
+                var b = alpha[Math.floor(Math.random() * alpha.length)];
+                var c = alpha[Math.floor(Math.random() * alpha.length)];
+                var d = alpha[Math.floor(Math.random() * alpha.length)];
+                var e = alpha[Math.floor(Math.random() * alpha.length)];
+                var f = alpha[Math.floor(Math.random() * alpha.length)];
+                var g = alpha[Math.floor(Math.random() * alpha.length)];
+            }
+            var code = a + ' ' + b + ' ' + ' ' + c + ' ' + d + ' ' + e + ' '+ f + ' ' + g;
+            document.getElementById("mainCaptcha").value = code
+            var colors = ["#B40404", "#beb1dd", "#b200ff", "#faff00", "#0000FF", "#FE2E9A", "#FF0080", "#2EFE2E", ];
+            var rand = Math.floor(Math.random() * colors.length);
+            $('#mainCaptcha').css("background-color", colors[rand]);
+ 
+        }
+        function removeSpaces(string){
+            return string.split(' ').join('');
+        }
+
+    }
+  
+  var nextStep = document.querySelector('#nextStep');
+
+  nextStep.addEventListener('click', function (e) {
+    e.preventDefault();
+    // Hide first view
+    document.getElementById('my_form').style.display = 'none';
+
+    // Show thank you message element
+    document.getElementById('thank_you').style.display = 'block';
+  });
+
+</script>
+</html>
